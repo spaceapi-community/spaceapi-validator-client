@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: alpine
     steps:
+      - checkout
       - run: |
           apk add nodejs
           apk add npm
