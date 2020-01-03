@@ -11,8 +11,8 @@ jobs:
     steps:
       - checkout
 
-      - run: npm install @openapitools/openapi-generator-cli -g
-      - run: openapi-generator batch \*.yml
+      - run: npm install @openapitools/openapi-generator-cli
+      - run: ~/repo/.node_modules/bin/openapi-generator batch \*.yml
 
       - restore_cache:
           keys:
