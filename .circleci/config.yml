@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
 
-      - run: openapi-generator batch \*.yml
+      - run: openapi-generator-cli batch \*.yml
 
       - restore_cache:
           keys:
@@ -41,7 +41,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: openapi-generator batch \*.yml
+      - run: openapi-generator-cli batch \*.yml
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
