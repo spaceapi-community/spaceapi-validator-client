@@ -12,6 +12,7 @@ jobs:
       - checkout
 
       - run: npm install @openapitools/openapi-generator-cli
+      - run: ls -laR ~/
       - run: ~/repo/.node_modules/bin/openapi-generator batch \*.yml
 
       - restore_cache:
