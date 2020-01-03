@@ -22,7 +22,7 @@ jobs:
           name: Publish package
           command: |
             cd javascript
-            npm publish
+            npm publish --access=public
 
 workflows:
   version: 2
