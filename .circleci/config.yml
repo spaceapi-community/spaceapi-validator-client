@@ -1,46 +1,14 @@
 version: 2
 
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: openapitools/openapi-generator-cli:latest
-
 jobs:
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-
-      - run: openapi-generator-cli batch \*.yml
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "javascript/package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: |
-          cd javascript
-          npm install
-      - run:
-          name: Run tests
-          command: |
-            cd javascript
-            npm test
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "javascript/package.json" }}
-
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
   deploy:
-    <<: *defaults
+    docker:
+      - image: alpine
     steps:
-      - attach_workspace:
-          at: ~/repo
+      - run: |
+          apk add nodejs
+          apk add openjdk8-jre
+          npm install @openapitools/openapi-generator-cli -g
       - run: openapi-generator-cli batch \*.yml
       - run:
           name: Authenticate with registry
@@ -58,14 +26,7 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - master
       - deploy:
-          requires:
-            - test
           filters:
             branches:
               only:
