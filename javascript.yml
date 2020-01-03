@@ -6,4 +6,4 @@ gitRepoId: 'spaceapi-validator-client'
 additionalProperties:
   usePromises: true
   useES6: false
-  projectName: 'spaceapi-validator-client'
+  projectName: '@spaceapi/validator-client'
