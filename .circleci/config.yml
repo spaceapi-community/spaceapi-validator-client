@@ -11,8 +11,7 @@ jobs:
     steps:
       - checkout
 
-      - run: npm install @openapitools/openapi-generator-cli
-      - run: ~/repo/node_modules/.bin/openapi-generator batch \*.yml
+      - run: openapi-generator batch \*.yml
 
       - restore_cache:
           keys:
@@ -42,11 +41,13 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: npm install @openapitools/openapi-generator-cli -g
       - run: openapi-generator batch \*.yml
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run: |
+          cd javascript
+          npm install
       - run:
           name: Publish package
           command: |
