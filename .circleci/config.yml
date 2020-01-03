@@ -10,7 +10,7 @@ jobs:
           apk add npm
           apk add openjdk8-jre
           npm install @openapitools/openapi-generator-cli -g
-      - run: openapi-generator-cli batch \*.yml
+      - run: openapi-generator batch \*.yml
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
