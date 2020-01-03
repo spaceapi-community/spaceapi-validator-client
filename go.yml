@@ -1,0 +1,7 @@
+'!include': 'shared/common.yml'
+outputDir: 'go'
+generatorName: 'go'
+gitUserId: 'spaceapi-community'
+gitRepoId: 'spaceapi-validator-client'
+additionalProperties:
+  packageName: 'spaceapivalidatorclient'
