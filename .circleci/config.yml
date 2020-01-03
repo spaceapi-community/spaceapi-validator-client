@@ -10,6 +10,7 @@ jobs:
           apk add npm
           apk add openjdk8-jre
           npm install @openapitools/openapi-generator-cli -g
+      - run: ls -laR
       - run: openapi-generator batch \*.yml
       - run:
           name: Authenticate with registry
