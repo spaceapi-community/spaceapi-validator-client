@@ -2,6 +2,6 @@
 outputDir: 'go'
 generatorName: 'go'
 gitUserId: 'spaceapi-community'
-gitRepoId: 'spaceapi-validator-client'
+gitRepoId: 'go-spaceapi-validator-client'
 additionalProperties:
   packageName: 'spaceapivalidatorclient'

@@ -1,1 +1,1 @@
-inputSpec: ./validator.json #https://validator.spaceapi.io/openapi.json
+inputSpec: https://validator.spaceapi.io/openapi.json
