@@ -1,0 +1,30 @@
+
+on:
+  push:
+    branches:
+      - master
+
+name: publish
+
+# Required for OIDC auth against npmjs.org, see https://docs.npmjs.com/trusted-publishers
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    name: Publish @spaceapi/validator-client on NPM registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate OpenAPI client
+        run: |
+          npm install @openapitools/openapi-generator-cli -g
+          openapi-generator-cli batch \*.yml
+          cd javascript
+          npm install
+          npm build
+      - name: Publish package
+        run: |
+          cd javascript
+          npm publish --access=public

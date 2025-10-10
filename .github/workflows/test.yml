@@ -1,0 +1,19 @@
+
+on: push
+
+name: test
+
+jobs:
+  test:
+    name: Publish @spaceapi/validator-client on NPM registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate OpenAPI client
+        run: |
+          npm install @openapitools/openapi-generator-cli -g
+          openapi-generator-cli batch \*.yml
+          cd javascript
+          npm install
+          npm build
+
