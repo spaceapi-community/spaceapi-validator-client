@@ -23,7 +23,7 @@ jobs:
           openapi-generator-cli batch \*.yml
           cd javascript
           npm install
-          npm build
+          npm run build
       - name: Publish package
         run: |
           cd javascript
