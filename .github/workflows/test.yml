@@ -1,0 +1,26 @@
+
+on: push
+
+name: test
+
+jobs:
+  test:
+    name: Build @spaceapi/validator-client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - name: Setup dependencies
+        run: |
+          npm install -g npm@latest
+          npm install @openapitools/openapi-generator-cli -g
+      - name: Generate OpenAPI client
+        run: |
+          openapi-generator-cli batch \*.yml
+          cd javascript
+          npm install
+          npm run build
+
